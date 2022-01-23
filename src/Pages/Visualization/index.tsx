@@ -2,11 +2,31 @@ import { useState } from "react";
 import DropdownField from "../../components/DropdownField";
 import countriesList from "../../assets/MockData/countries";
 import statesList from "../../assets/MockData/stateList";
+import Table from "../../components/Table";
+import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
 
 export default function Visualization() {
   const [country, setCountry] = useState(null);
   const [state, setState] = useState(null);
 
+  const columns = [
+    {
+      field: "city",
+      header: "City",
+    },
+    {
+      field: "totalPopulation",
+      header: "Total Population",
+    },
+    {
+      field: "vaccinatePopulation",
+      header: "Vaccinate Population",
+    },
+    {
+      field: "dosesAvailable",
+      header: "Doses Available",
+    },
+  ];
   return (
     <>
       <div className="container-fluid">
@@ -40,6 +60,8 @@ export default function Visualization() {
             )}
           </div>
         </div>
+
+        <Table data={tamilNaduVacctionStatus} columns={columns} />
       </div>
     </>
   );
