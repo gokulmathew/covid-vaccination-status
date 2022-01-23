@@ -1,4 +1,4 @@
-import appConstants from "../../Constants/appConstants";
+import appConstants from "../../constants/appConstants";
 import styles from "./header.module.scss";
 
 export default function Header() {

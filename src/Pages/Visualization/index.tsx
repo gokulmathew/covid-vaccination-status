@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DropdownField from "../../Components/DropdownField";
+import DropdownField from "../../components/DropdownField";
 import countriesList from "../../assets/MockData/countries";
 import statesList from "../../assets/MockData/stateList";
 
@@ -39,7 +39,7 @@ export default function Visualization() {
               />
             )}
           </div>
-        </div>       
+        </div>
       </div>
     </>
   );

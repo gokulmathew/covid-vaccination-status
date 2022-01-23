@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import routeConstants from "../Constants/routeConstants";
+import routeConstants from "../constants/routeConstants";
 
 // import PageNotFound from "../pages/PageNotFound";
 
 const VisulizationPageComponent = React.lazy(
-  () => import("../Pages/Visualization")
+  () => import("../pages/Visualization")
 );
 
 const AppRoutes = () => (
