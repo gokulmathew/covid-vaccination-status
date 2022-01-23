@@ -6,6 +6,7 @@ import Table from "../../components/Table";
 import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
 import { ToggleButton } from "primereact/togglebutton";
 import appConstants from "../../constants/appConstants";
+import Chart from "../../components/Chart";
 
 export default function Visualization() {
   const [country, setCountry] = useState(null);
@@ -22,8 +23,8 @@ export default function Visualization() {
       header: "Total Population",
     },
     {
-      field: "vaccinatePopulation",
-      header: "Vaccinate Population",
+      field: "vaccinatedPopulation",
+      header: "Vaccinated Population",
     },
     {
       field: "dosesAvailable",
@@ -81,6 +82,15 @@ export default function Visualization() {
         {state && displayTable && (
           <Table data={tamilNaduVacctionStatus} columns={columns} />
         )}
+        {/* {state && !displayTable && <Chart />} */}
+        <Chart
+          chartData={tamilNaduVacctionStatus}
+          chartName="State's Vaccination Status"
+          chartKey="city"
+          dataKey1="totalPopulation"
+          dataKey2="vaccinatedPopulation"
+          dataKey3="dosesAvailable"
+        />
       </div>
     </>
   );

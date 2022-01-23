@@ -2,19 +2,19 @@ const tamilNaduVacctionStatus = [
   {
     city: "Chennai",
     totalPopulation: 1000,
-    vaccinatePopulation: 500,
+    vaccinatedPopulation: 500,
     dosesAvailable: 100,
   },
   {
-    city: "Chennai",
+    city: "Parrys",
     totalPopulation: 1000,
-    vaccinatePopulation: 500,
+    vaccinatedPopulation: 500,
     dosesAvailable: 100,
   },
   {
-    city: "Chennai",
+    city: "Kanchipuram",
     totalPopulation: 1000,
-    vaccinatePopulation: 500,
+    vaccinatedPopulation: 500,
     dosesAvailable: 100,
   },
 ];
