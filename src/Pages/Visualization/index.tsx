@@ -39,7 +39,7 @@ export default function Visualization() {
               />
             )}
           </div>
-        </div>
+        </div>       
       </div>
     </>
   );
