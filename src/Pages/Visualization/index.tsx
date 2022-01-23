@@ -4,10 +4,13 @@ import countriesList from "../../assets/MockData/countries";
 import statesList from "../../assets/MockData/stateList";
 import Table from "../../components/Table";
 import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
+import { ToggleButton } from "primereact/togglebutton";
+import appConstants from "../../constants/appConstants";
 
 export default function Visualization() {
   const [country, setCountry] = useState(null);
   const [state, setState] = useState(null);
+  const [displayTable, setDisplayTable] = useState(true);
 
   const columns = [
     {
@@ -45,6 +48,7 @@ export default function Visualization() {
             />
           </div>
           <div className="col-4">
+            {/* Country has to be selected to display state dropdown */}
             {country && (
               <DropdownField
                 value={state}
@@ -59,9 +63,24 @@ export default function Visualization() {
               />
             )}
           </div>
+          <div className="col-4 text-center">
+            {/* State has to be selected to display Toggle  */}
+            {state && (
+              <ToggleButton
+                checked={displayTable}
+                onChange={() => setDisplayTable(!displayTable)}
+                onLabel={appConstants.chartDisplay}
+                offLabel={appConstants.tableDisplay}
+                style={{ width: "15rem" }}
+              />
+            )}
+          </div>
         </div>
 
-        <Table data={tamilNaduVacctionStatus} columns={columns} />
+        {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
+        {state && displayTable && (
+          <Table data={tamilNaduVacctionStatus} columns={columns} />
+        )}
       </div>
     </>
   );
