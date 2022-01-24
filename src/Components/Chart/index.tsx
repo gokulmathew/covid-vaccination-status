@@ -2,11 +2,13 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
 interface IChart {
   chartData: any;
-  chartName: string;
   chartKey: string;
   dataKey1: string;
   dataKey2: string;
   dataKey3: string;
+  width: number;
+  height: number;
+  barSize: number;
 }
 
 export default function Chart({
@@ -15,12 +17,14 @@ export default function Chart({
   dataKey1,
   dataKey2,
   dataKey3,
-  chartName,
+  width,
+  height,
+  barSize,
 }: IChart) {
   return (
     <BarChart
-      width={500}
-      height={300}
+      width={width}
+      height={height}
       data={chartData}
       margin={{
         top: 20,
@@ -28,23 +32,15 @@ export default function Chart({
         left: 20,
         bottom: 5,
       }}
-      // To change the bar width
-      barSize={20}
+      barSize={barSize}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      {/* tick false means no x axis name */}
-      {/* dataKey represents the name to displayed when hover on a bar */}
-      {/* <XAxis
-        label={{ value: "State's Vaccination Status", dy: 10 }}
-        tick={false}
-      /> */}
-      <XAxis dataKey={chartKey} label={{ value: { chartName }, dy: 20 }} />
+      <XAxis dataKey={chartKey} />
       <YAxis />
       <Tooltip />
-      {/* <Legend /> */}
-      <Bar dataKey={dataKey1} stackId="a" fill="#8884d8" />
-      <Bar dataKey={dataKey2} stackId="b" fill="#82ca9d" />
-      <Bar dataKey={dataKey3} stackId="b" fill="red" />
+      <Bar dataKey={dataKey1} stackId="a" fill="#82ca9d" />
+      <Bar dataKey={dataKey2} stackId="b" fill="#8884d8" />
+      <Bar dataKey={dataKey3} stackId="b" fill="#ffc658" />
     </BarChart>
   );
 }

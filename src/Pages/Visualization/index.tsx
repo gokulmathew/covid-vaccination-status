@@ -78,19 +78,26 @@ export default function Visualization() {
           </div>
         </div>
 
+        {state && <h2>{appConstants.VisualizationPageHeader}</h2>}
+
         {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
         {state && displayTable && (
           <Table data={tamilNaduVacctionStatus} columns={columns} />
         )}
-        {/* {state && !displayTable && <Chart />} */}
-        <Chart
-          chartData={tamilNaduVacctionStatus}
-          chartName="State's Vaccination Status"
-          chartKey="city"
-          dataKey1="totalPopulation"
-          dataKey2="vaccinatedPopulation"
-          dataKey3="dosesAvailable"
-        />
+
+        {/* Info: Displaying Chart after state is selected and displayTable state has to be false */}
+        {state && !displayTable && (
+          <Chart
+            chartData={tamilNaduVacctionStatus}
+            chartKey="city"
+            dataKey1="totalPopulation"
+            dataKey2="vaccinatedPopulation"
+            dataKey3="dosesAvailable"
+            width={1500}
+            height={700}
+            barSize={40}
+          />
+        )}
       </div>
     </>
   );
