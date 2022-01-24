@@ -7,6 +7,11 @@ import configureAppStore from "./store/configureAppStore";
 // Style Imports
 import "./styles/app.global.scss";
 import "./index.css";
+// mirage server
+import makeServer from "./mirage/index";
+
+// Info: Running mirage local server
+makeServer();
 
 const store = configureAppStore();
 
