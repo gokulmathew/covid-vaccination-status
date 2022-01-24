@@ -10,7 +10,7 @@ import Chart from "../../components/Chart";
 
 export default function Visualization() {
   const [country, setCountry] = useState(null);
-  const [state, setState] = useState(null);
+  const [state, setState] = useState<any>(null);
   const [displayTable, setDisplayTable] = useState(true);
 
   const columns = [
@@ -34,6 +34,7 @@ export default function Visualization() {
   return (
     <>
       <div className="container-fluid">
+        <p>{appConstants.helpText}</p>
         <div className="row">
           <div className="col-4">
             <DropdownField
@@ -78,7 +79,12 @@ export default function Visualization() {
           </div>
         </div>
 
-        {state && <h2>{appConstants.VisualizationPageHeader}</h2>}
+        {state && (
+          <h2>
+            {state && state.label}'s
+            {appConstants.VisualizationPageHeader}
+          </h2>
+        )}
 
         {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
         {state && displayTable && (
@@ -94,7 +100,7 @@ export default function Visualization() {
             dataKey2="vaccinatedPopulation"
             dataKey3="dosesAvailable"
             width={1500}
-            height={700}
+            height={650}
             barSize={40}
           />
         )}

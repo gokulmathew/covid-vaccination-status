@@ -2,7 +2,8 @@ const appConstants = {
   header: "Covid Vaccination Status",
   tableDisplay: "Display Data in Table",
   chartDisplay: "Display Data in Chart",
-  VisualizationPageHeader: "State's Vaccination Status",
+  VisualizationPageHeader: " Vaccination Status",
+  helpText: "Select Country and state to know the vaccination status",
 };
 
 export default appConstants;
