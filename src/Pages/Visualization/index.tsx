@@ -1,36 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { ToggleButton } from "primereact/togglebutton";
+// Redux imports
+import { getCountryListRequest } from "./visulizationSlice";
+// Component Imports
+import Table from "../../components/Table";
+import Chart from "../../components/Chart";
 import DropdownField from "../../components/DropdownField";
+// Constant Imports
 import countriesList from "../../assets/MockData/countries";
 import statesList from "../../assets/MockData/stateList";
-import Table from "../../components/Table";
-import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
-import { ToggleButton } from "primereact/togglebutton";
 import appConstants from "../../constants/appConstants";
-import Chart from "../../components/Chart";
+import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
+import visualizationTableColumns from "../../constants/visualizationTableColumn";
 
 export default function Visualization() {
   const [country, setCountry] = useState(null);
   const [state, setState] = useState<any>(null);
   const [displayTable, setDisplayTable] = useState(true);
 
-  const columns = [
-    {
-      field: "city",
-      header: "City",
-    },
-    {
-      field: "totalPopulation",
-      header: "Total Population",
-    },
-    {
-      field: "vaccinatedPopulation",
-      header: "Vaccinated Population",
-    },
-    {
-      field: "dosesAvailable",
-      header: "Doses Available",
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCountryListRequest());
+  }, []);
+
   return (
     <>
       <div className="container-fluid">
@@ -88,7 +81,10 @@ export default function Visualization() {
 
         {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
         {state && displayTable && (
-          <Table data={tamilNaduVacctionStatus} columns={columns} />
+          <Table
+            data={tamilNaduVacctionStatus}
+            columns={visualizationTableColumns}
+          />
         )}
 
         {/* Info: Displaying Chart after state is selected and displayTable state has to be false */}
