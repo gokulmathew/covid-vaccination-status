@@ -4,15 +4,15 @@ import {
   getCountryListSuccess,
   getCountryListFail,
 } from "./visulizationSlice";
+import countriesList from "../../assets/MockData/countries";
+
 // import ontologyService from "./service";
 
 // Generator to get Country list
 function* getCountryList(action: any) {
   try {
-    console.log(" Saga called");
-    const { data } = action.payload;
     // const response = yield call(ontologyService.getOntologyList);
-    // yield put(getCountryListSuccess(response.data));
+    yield put(getCountryListSuccess(countriesList));
   } catch (e: any) {
     yield put(getCountryListFail());
   }
