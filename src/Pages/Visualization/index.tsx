@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToggleButton } from "primereact/togglebutton";
 // Redux imports
-import { getCountryListRequest } from "./visulizationSlice";
+import { visulizationActions } from "./visulizationSlice";
 // Component Imports
 import Table from "../../components/Table";
 import Chart from "../../components/Chart";
 import DropdownField from "../../components/DropdownField";
 // Constant Imports
-import statesList from "../../assets/MockData/stateList";
 import appConstants from "../../constants/appConstants";
 import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
 import visualizationTableColumns from "../../constants/visualizationTableColumn";
@@ -20,13 +19,20 @@ export default function Visualization() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCountryListRequest());
+    dispatch(visulizationActions.getCountryListRequest());
+    dispatch(visulizationActions.getStateListRequest());
   }, []);
 
   let countryList = null;
   countryList = useSelector(
     (state: any) =>
       state && state.visualization && state.visualization.countryList
+  );
+
+  let stateList = null;
+  stateList = useSelector(
+    (state: any) =>
+      state && state.visualization && state.visualization.stateList
   );
 
   return (
@@ -59,7 +65,7 @@ export default function Visualization() {
                 placeholder="Select State"
                 elementClasses=""
                 label=""
-                options={statesList}
+                options={stateList}
               />
             )}
           </div>

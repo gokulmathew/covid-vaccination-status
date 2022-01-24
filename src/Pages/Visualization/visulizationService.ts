@@ -7,4 +7,11 @@ export default class visualizationService {
       method: "get",
       url: "https://getcountryList",
     });
+
+  // Service to get State List
+  public static getStateList = () =>
+    axios({
+      method: "get",
+      url: "https://getstateList",
+    });
 }
