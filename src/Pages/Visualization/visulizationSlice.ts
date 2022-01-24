@@ -32,7 +32,7 @@ const slice = createSlice({
     },
 
     //reducer to update State List
-    getStateListRequest: (visulization: any) => {
+    getStateListRequest: (visulization: any, action: any) => {
       visulization.loading = true;
     },
 

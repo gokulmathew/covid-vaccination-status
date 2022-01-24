@@ -1,3 +1,4 @@
+import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
 interface IChart {
@@ -11,7 +12,7 @@ interface IChart {
   barSize: number;
 }
 
-export default function Chart({
+function Chart({
   chartData,
   chartKey,
   dataKey1,
@@ -44,3 +45,6 @@ export default function Chart({
     </BarChart>
   );
 }
+
+const MemoizedChart = React.memo(Chart);
+export default MemoizedChart;

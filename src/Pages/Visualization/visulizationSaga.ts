@@ -13,9 +13,12 @@ function* getCountryList(): any {
 }
 
 // Generator to get State list
-function* getStateList(): any {
+function* getStateList(action: any): any {
   try {
-    const response = yield call(visualizationService.getStateList);
+    const response = yield call(
+      visualizationService.getStateList,
+      action.payload
+    );
     yield put(visulizationActions.getStateListSuccess(response.data));
   } catch (e: any) {
     yield put(visulizationActions.getStateListFail());

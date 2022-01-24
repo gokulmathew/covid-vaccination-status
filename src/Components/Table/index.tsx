@@ -1,3 +1,4 @@
+import React from "react";
 import style from "./table.module.scss";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -9,7 +10,7 @@ interface IDataProps {
   columns: object[];
 }
 
-export default function Table({ data, columns }: IDataProps) {
+function Table({ data, columns }: IDataProps) {
   return (
     <div>
       <div className={`${style.tableWidth}`}>
@@ -21,10 +22,13 @@ export default function Table({ data, columns }: IDataProps) {
           currentPageReportTemplate="Showing {first} - {last} of {totalRecords}"
         >
           {columns.map((value: any) => (
-            <Column field={value.field} header={value.header} />
+            <Column field={value.field} header={value.header} key={value.key} />
           ))}
         </DataTable>
       </div>
     </div>
   );
 }
+
+const MemoizedTable = React.memo(Table);
+export default MemoizedTable;

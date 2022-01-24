@@ -13,15 +13,19 @@ import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationS
 import visualizationTableColumns from "../../constants/visualizationTableColumn";
 
 export default function Visualization() {
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState<any>(null);
   const [state, setState] = useState<any>(null);
   const [displayTable, setDisplayTable] = useState(true);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(visulizationActions.getCountryListRequest());
-    dispatch(visulizationActions.getStateListRequest());
   }, []);
+
+  useEffect(() => {
+    dispatch(visulizationActions.getStateListRequest(country && country.value));
+  }, [country]);
 
   let countryList = null;
   countryList = useSelector(

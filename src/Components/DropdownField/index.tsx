@@ -1,3 +1,4 @@
+import React from "react";
 import Select from "react-select";
 
 // Dropdown placeholder CSS
@@ -22,7 +23,7 @@ interface ITextProps {
 }
 
 // Function used to render Dropdown Field
-export default function DropdownField({
+function DropdownField({
   value,
   handleOnChange,
   disable,
@@ -64,3 +65,6 @@ export default function DropdownField({
     </div>
   );
 }
+
+const MemoizedDropdownField = React.memo(DropdownField);
+export default MemoizedDropdownField;

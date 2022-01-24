@@ -9,7 +9,10 @@ export default function makeServer() {
       this.get("https://getcountryList", () => countriesList);
 
       // State ListAPI
-      this.get("https://getstateList", () => statesList);
+      this.get("https://getstateList/:countryName", (schema, request: any) => {
+        console.log(request && request.params && request.params.countryName);
+        return statesList;
+      });
     },
   });
 }
