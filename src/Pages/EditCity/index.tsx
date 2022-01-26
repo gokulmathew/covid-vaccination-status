@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import NumberField from "../../components/NumberField";
 // Component imports
+import NumberField from "../../components/NumberField";
 import TextField from "../../components/TextField";
+import ButtonField from "../../components/Button";
 import appConstants from "../../constants/appConstants";
 
 export default function EditCity() {
@@ -30,10 +31,36 @@ export default function EditCity() {
           value={totalPopulation}
           handleOnChange={settotalPopulation}
           disable={false}
-          spacingClasses=""
+          spacingClasses="my-3"
           labelClasses=""
           placeholder=""
           elementClasses=""
+        />
+        <NumberField
+          label="Total Population"
+          value={totalPopulation}
+          handleOnChange={settotalPopulation}
+          disable={false}
+          spacingClasses="my-3"
+          labelClasses=""
+          placeholder=""
+          elementClasses=""
+        />
+        <NumberField
+          label="Total Population"
+          value={totalPopulation}
+          handleOnChange={settotalPopulation}
+          disable={false}
+          spacingClasses="my-3"
+          labelClasses=""
+          placeholder=""
+          elementClasses=""
+        />
+        <ButtonField
+          value="Save"
+          disable={false}
+          onClickFunction={() => console.log("save")}
+          spacingClasses=""
         />
       </form>
     </div>
