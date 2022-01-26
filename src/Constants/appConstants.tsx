@@ -5,6 +5,7 @@ const appConstants = {
   VisualizationPageHeader: " Vaccination Status",
   helpText: "Select Country and state to know the vaccination status",
   INDIA: "India",
+  EDIT_PAGE_HEADER:'Edit City'
 };
 
 export default appConstants;

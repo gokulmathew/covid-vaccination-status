@@ -10,7 +10,7 @@ const placeholderStyles = {
 };
 
 // Interface for Dropdown field
-interface ITextProps {
+interface IDropdownProps {
   label: string;
   value: any;
   handleOnChange: (e: any) => void;
@@ -33,7 +33,7 @@ function DropdownField({
   elementClasses,
   label,
   options,
-}: ITextProps): any {
+}: IDropdownProps): any {
   const unSelectedOptions: any = [];
 
   // Info: filterting unselected options

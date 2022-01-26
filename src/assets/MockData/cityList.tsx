@@ -4,18 +4,21 @@ export const cityListInTamilNadu = [
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 1,
   },
   {
     city: "Coimbatore",
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 2,
   },
   {
     city: "Madurai",
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 3,
   },
 ];
 
@@ -25,18 +28,21 @@ export const cityListInKerala = [
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 1,
   },
   {
     city: "Kozhikode",
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 2,
   },
   {
     city: "Kochi",
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 3,
   },
 ];
 
@@ -46,17 +52,20 @@ export const cityListInKarnataka = [
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 1,
   },
   {
     city: "Mysuru",
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 2,
   },
   {
     city: "Davangere",
     totalPopulation: 1000,
     vaccinatedPopulation: 500,
     dosesAvailable: 100,
+    id: 3,
   },
 ];
