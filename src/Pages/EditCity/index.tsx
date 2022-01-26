@@ -80,7 +80,13 @@ export default function EditCity() {
     e.preventDefault();
     dispatch(visulizationActions.getCityListSuccess(tableCityList));
     console.log("tableCityList", tableCityList);
-    navigate(routeConstants.homePage);
+    toast &&
+      toast.current.show({
+        severity: "success",
+        summary: "Success",
+        detail: notificationConstants.DATA_SAVED_MESSAGE,
+        life: 3000,
+      });
   };
 
   const breadCrumbItems: any = [];
