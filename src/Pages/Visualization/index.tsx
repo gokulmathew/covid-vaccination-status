@@ -25,6 +25,8 @@ export default function Visualization() {
 
   useEffect(() => {
     dispatch(visulizationActions.getStateListRequest(country && country.value));
+    // Info: When country is changed, setting state to null
+    setState(null);
   }, [country]);
 
   let countryList = null;

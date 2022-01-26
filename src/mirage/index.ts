@@ -1,5 +1,5 @@
 import { createServer } from "miragejs";
-// Mock Data imports 
+// Mock Data imports
 import countriesList from "../assets/MockData/countryList";
 import { inidiaStatesList } from "../assets/MockData/stateList";
 // Constant Imports
@@ -18,7 +18,7 @@ export default function makeServer() {
           if (
             request &&
             request.params &&
-            request.params.countryName == {appConstants.INDIA}
+            request.params.countryName == appConstants.INDIA
           )
             return inidiaStatesList;
           else return [];
