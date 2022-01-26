@@ -4,12 +4,14 @@ export interface IVisulizationSlice {
   loading: boolean;
   countryList: any;
   stateList: any;
+  cityList: any;
 }
 
 const initialState: IVisulizationSlice = {
   loading: false,
   countryList: [],
   stateList: [],
+  cityList: [],
 };
 
 const slice = createSlice({
@@ -42,6 +44,20 @@ const slice = createSlice({
     },
 
     getStateListFail: (visulization: any) => {
+      visulization.loading = false;
+    },
+
+    //Reducer to update City List
+    getCityListRequest: (visulization: any, action: any) => {
+      visulization.loading = true;
+    },
+
+    getCityListSuccess: (visulization: any, action: any) => {
+      visulization.loading = false;
+      visulization.cityList = action.payload;
+    },
+
+    getCityListFail: (visulization: any) => {
       visulization.loading = false;
     },
   },

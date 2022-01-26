@@ -25,10 +25,23 @@ function* getStateList(action: any): any {
   }
 }
 
+// Generator to get City list
+function* getCityList(action: any): any {
+  try {
+    const response = yield call(
+      visualizationService.getCityList,
+      action.payload
+    );
+    yield put(visulizationActions.getCityListSuccess(response.data));
+  } catch (e: any) {
+    yield put(visulizationActions.getCityListFail());
+  }
+}
 export default function* watchVisulizationSaga() {
   yield takeLatest(
     visulizationActions.getCountryListRequest.type,
     getCountryList
   );
   yield takeLatest(visulizationActions.getStateListRequest.type, getStateList);
+  yield takeLatest(visulizationActions.getCityListRequest.type, getCityList);
 }

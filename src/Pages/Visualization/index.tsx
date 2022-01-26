@@ -9,7 +9,6 @@ import Chart from "../../components/Chart";
 import DropdownField from "../../components/DropdownField";
 // Constant Imports
 import appConstants from "../../constants/appConstants";
-import tamilNaduVacctionStatus from "../../assets/MockData/tamilNaduVaccinationStatus";
 import visualizationTableColumns from "../../constants/visualizationTableColumn";
 
 export default function Visualization() {
@@ -19,15 +18,22 @@ export default function Visualization() {
 
   const dispatch = useDispatch();
 
+  // Info: Initially making API call to get country list
   useEffect(() => {
     dispatch(visulizationActions.getCountryListRequest());
   }, []);
 
+  // Info: When country is changing, fetching state List
   useEffect(() => {
     dispatch(visulizationActions.getStateListRequest(country && country.value));
     // Info: When country is changed, setting state to null
     setState(null);
   }, [country]);
+
+  // Info: When state is changing, fetching city List
+  useEffect(() => {
+    dispatch(visulizationActions.getCityListRequest(state && state.value));
+  }, [state]);
 
   let countryList = null;
   countryList = useSelector(
@@ -41,6 +47,10 @@ export default function Visualization() {
       state && state.visualization && state.visualization.stateList
   );
 
+  let cityList = null;
+  cityList = useSelector(
+    (state: any) => state && state.visualization && state.visualization.cityList
+  );
   return (
     <>
       <div className="container-fluid">
@@ -98,16 +108,13 @@ export default function Visualization() {
 
         {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
         {state && displayTable && (
-          <Table
-            data={tamilNaduVacctionStatus}
-            columns={visualizationTableColumns}
-          />
+          <Table data={cityList} columns={visualizationTableColumns} />
         )}
 
         {/* Info: Displaying Chart after state is selected and displayTable state has to be false */}
         {state && !displayTable && (
           <Chart
-            chartData={tamilNaduVacctionStatus}
+            chartData={cityList}
             chartKey="city"
             dataKey1="totalPopulation"
             dataKey2="vaccinatedPopulation"

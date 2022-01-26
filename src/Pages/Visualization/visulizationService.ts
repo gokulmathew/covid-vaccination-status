@@ -14,4 +14,11 @@ export default class visualizationService {
       method: "get",
       url: `https://getstateList/${countryName}`,
     });
+
+  // Service to get City List
+  public static getCityList = (countryName: string) =>
+    axios({
+      method: "get",
+      url: `https://getCityList/${countryName}`,
+    });
 }
