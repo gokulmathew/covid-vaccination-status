@@ -7,6 +7,7 @@ import routeConstants from "../constants/routeConstants";
 const VisulizationPageComponent = React.lazy(
   () => import("../pages/Visualization")
 );
+const EditCityPageComponent = React.lazy(() => import("../pages/EditCity"));
 
 const AppRoutes = () => (
   <Routes>
@@ -15,6 +16,14 @@ const AppRoutes = () => (
       element={
         <React.Suspense fallback={<>...</>}>
           <VisulizationPageComponent />
+        </React.Suspense>
+      }
+    />
+    <Route
+      path={routeConstants.editCity}
+      element={
+        <React.Suspense fallback={<>...</>}>
+          <EditCityPageComponent />
         </React.Suspense>
       }
     />
