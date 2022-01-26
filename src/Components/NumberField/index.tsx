@@ -1,10 +1,10 @@
 import React from "react";
-import { InputText } from "primereact/inputtext";
+import { InputNumber } from "primereact/inputnumber";
 
-// Interface for Text field
-interface ITextProps {
-  label: string;
-  value: any;
+// Interface for Number field
+interface INumberProps {
+  label: any;
+  value: number;
   handleOnChange: (e: any) => void;
   disable: boolean;
   spacingClasses: string;
@@ -13,8 +13,8 @@ interface ITextProps {
   elementClasses: string;
 }
 
-// Function used to render Text Field
-function TextField({
+// Function used to render Number Field
+function NumberField({
   label,
   value,
   handleOnChange,
@@ -23,20 +23,21 @@ function TextField({
   labelClasses,
   placeholder,
   elementClasses,
-}: ITextProps) {
+}: INumberProps) {
   return (
     <div className={`${spacingClasses}`}>
       {label && <label className={`${labelClasses}`}>{label}</label>}
-      <InputText
+      <InputNumber
         value={value}
         onChange={(e: any) => handleOnChange(e.value)}
         placeholder={placeholder}
         className={`d-block mt-2 ${elementClasses}`}
         disabled={disable}
+        min={0}
       />
     </div>
   );
 }
 
-const MemoizedTextField = React.memo(TextField);
-export default MemoizedTextField;
+const MemoizedNumberField = React.memo(NumberField);
+export default MemoizedNumberField;
