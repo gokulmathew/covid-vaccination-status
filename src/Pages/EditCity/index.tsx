@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
+import { Toast } from "primereact/toast";
 // Component imports
 import ButtonField from "../../components/Button";
 import appConstants from "../../constants/appConstants";
+import notificationConstants from "../../constants/notificationConstans";
+// Redux Imports
 import { visulizationActions } from "../Visualization/visulizationSlice";
 
 export default function EditCity() {
+  const toast: any = useRef(null);
   const { state }: any = useLocation();
   // let { rowData, cityList } = state;
   let rowData = state && state.rowData;
@@ -18,7 +22,7 @@ export default function EditCity() {
 
   const [tableCityList, setTableCurrentCityList] = useState<any>(cityList);
 
-  const updateCityList = (newValue: string, key: string) => {
+  const updateCityList = (newValue: string | number, key: string) => {
     let tempCityList = [...tableCityList];
     const index =
       tableCityList &&
@@ -26,8 +30,39 @@ export default function EditCity() {
         (cityDetail: any) => cityDetail.id === currentRowData.id
       );
     const data = tempCityList[index];
-    data[key] = newValue;
-    setTableCurrentCityList(tempCityList);
+    let error = false;
+    if (key === "vaccinatedPopulation") {
+      if (newValue > data.totalPopulation) {
+        error = true;
+        toast &&
+          toast.current.show({
+            severity: "error",
+            summary: "Error",
+            detail: notificationConstants.VACCINATED_POPULATION_LIMIT_MESSAGE,
+            life: 3000,
+          });
+        data[key] = data.totalPopulation;
+        setTableCurrentCityList(tempCityList);
+      }
+    } else if (key === "dosesAvailable") {
+      if (newValue > appConstants.MAX_DOSES_AVAILABLE_COUNT) {
+        error = true;
+        toast &&
+          toast.current.show({
+            severity: "error",
+            summary: "Error",
+            detail: notificationConstants.MAX_DOSES_AVAILABLE_MESSAGE,
+            life: 3000,
+          });
+        data[key] = appConstants.MAX_DOSES_AVAILABLE_COUNT;
+        setTableCurrentCityList(tempCityList);
+      }
+    }
+    // Info; Update the value in state only if there is no error
+    if (error === false) {
+      data[key] = newValue;
+      setTableCurrentCityList(tempCityList);
+    }
   };
 
   useEffect(() => {
@@ -45,6 +80,8 @@ export default function EditCity() {
 
   return (
     <div className="container">
+      {/* For Toast message */}
+      <Toast ref={toast} />
       <h2>{appConstants.EDIT_PAGE_HEADER}</h2>
       <form>
         <label className="mt-2">City Name</label>
@@ -85,6 +122,13 @@ export default function EditCity() {
           onChange={(e: any) =>
             updateCityList(e && e.value, "vaccinatedPopulation")
           }
+          max={
+            (tableCityList &&
+              tableCityList.filter(
+                (cityDetail: any) => cityDetail.id === currentRowData.id
+              )[0].totalPopulation) ||
+            0
+          }
           className={`d-block mb-2`}
         />
 
@@ -98,6 +142,7 @@ export default function EditCity() {
             0
           }
           onChange={(e: any) => updateCityList(e && e.value, "dosesAvailable")}
+          max={appConstants.MAX_DOSES_AVAILABLE_COUNT}
           className={`d-block mb-2`}
         />
 
