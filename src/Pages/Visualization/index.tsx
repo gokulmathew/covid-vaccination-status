@@ -21,62 +21,69 @@ export default function Visualization() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Info: Initially making API call to get country list
-  useEffect(() => {
-    dispatch(visulizationActions.getCountryListRequest());
-  }, []);
-
-  // Info: When country is changing, fetching state List
-  useEffect(() => {
-    dispatch(visulizationActions.getStateListRequest(country && country.value));
-    // Info: When country is changed, setting state to null
-    setState(null);
-  }, [country]);
-
-  // Info: When state is changing, fetching city List
-  useEffect(() => {
-    dispatch(visulizationActions.getCityListRequest(state && state.value));
-  }, [state]);
-
-  let countryList = null;
+  let countryList: any = null;
   countryList = useSelector(
     (state: any) =>
       state && state.visualization && state.visualization.countryList
   );
+  // Info: Initially making API call to get country list
+  useEffect(() => {
+    if (countryList === null || countryList.length == 0)
+      dispatch(visulizationActions.getCountryListRequest());
+  }, []);
 
-  let stateList = null;
+  let stateList: any = null;
   stateList = useSelector(
     (state: any) =>
       state && state.visualization && state.visualization.stateList
   );
 
+  // Info: When country is changing, fetching state List
+  useEffect(() => {
+    if (stateList === null || stateList.length == 0) {
+      dispatch(
+        visulizationActions.getStateListRequest(country && country.value)
+      );
+      // Info: When country is changed, setting state to null
+      setState(null);
+    }
+  }, [country]);
+
   let cityList: any = null;
   cityList = useSelector(
     (state: any) => state && state.visualization && state.visualization.cityList
   );
-  cityList = [
-    {
-      city: "Chennai",
-      totalPopulation: 1000,
-      vaccinatedPopulation: 500,
-      dosesAvailable: 100,
-      id: 1,
-    },
-    {
-      city: "Coimbatore",
-      totalPopulation: 1000,
-      vaccinatedPopulation: 500,
-      dosesAvailable: 100,
-      id: 2,
-    },
-    {
-      city: "Madurai",
-      totalPopulation: 1000,
-      vaccinatedPopulation: 500,
-      dosesAvailable: 100,
-      id: 3,
-    },
-  ];
+
+  // Info: When state is changing, fetching city List
+  useEffect(() => {
+    if (cityList === null || cityList.length == 0)
+      dispatch(visulizationActions.getCityListRequest(state && state.value));
+  }, [state]);
+
+  console.log("cityListstore", cityList);
+  // cityList = [
+  //   {
+  //     city: "Chennai",
+  //     totalPopulation: 1000,
+  //     vaccinatedPopulation: 500,
+  //     dosesAvailable: 100,
+  //     id: 1,
+  //   },
+  //   {
+  //     city: "Coimbatore",
+  //     totalPopulation: 1000,
+  //     vaccinatedPopulation: 500,
+  //     dosesAvailable: 100,
+  //     id: 2,
+  //   },
+  //   {
+  //     city: "Madurai",
+  //     totalPopulation: 1000,
+  //     vaccinatedPopulation: 500,
+  //     dosesAvailable: 100,
+  //     id: 3,
+  //   },
+  // ];
 
   // Function to render Edit button
   const editButton = (rowData: any) => {
