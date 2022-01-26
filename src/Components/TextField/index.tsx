@@ -40,3 +40,46 @@ function TextField({
 
 const MemoizedTextField = React.memo(TextField);
 export default MemoizedTextField;
+
+{
+  /* <TextField
+          label="City Name"
+          value={currentCityName}
+          handleOnChange={setCurrentCityName}
+          disable={false}
+          spacingClasses=""
+          labelClasses=""
+          placeholder=""
+          elementClasses=""
+        />
+        <NumberField
+          label="Total Population"
+          value={totalPopulation}
+          handleOnChange={settotalPopulation}
+          disable={false}
+          spacingClasses="my-3"
+          labelClasses=""
+          placeholder=""
+          elementClasses=""
+        />
+        <NumberField
+          label="Total Population"
+          value={totalPopulation}
+          handleOnChange={settotalPopulation}
+          disable={false}
+          spacingClasses="my-3"
+          labelClasses=""
+          placeholder=""
+          elementClasses=""
+        />
+        <NumberField
+          label="Total Population"
+          value={totalPopulation}
+          handleOnChange={settotalPopulation}
+          disable={false}
+          spacingClasses="my-3"
+          labelClasses=""
+          placeholder=""
+          elementClasses=""
+        /> */
+}
