@@ -1,29 +1,17 @@
 import React from "react";
 import style from "./table.module.scss";
 import { DataTable } from "primereact/datatable";
-import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
-import { useNavigate } from "react-router-dom";
 
 interface IDataProps {
   data: any;
   columns: object[];
+  editButton?: (e: any) => void;
 }
 
-function Table({ data, columns }: IDataProps) {
-  let navigate = useNavigate();
-  // Function to return Edit button
-  const editButton = (rowData: any) => {
-    return (
-      <Button
-        type="button"
-        onClick={() => navigate("/edit", { state: rowData })}
-        icon="pi pi-fw pi-pencil"
-      ></Button>
-    );
-  };
+function Table({ data, columns, editButton }: IDataProps) {
   return (
     <div>
       <div className={`${style.tableWidth}`}>
@@ -37,7 +25,7 @@ function Table({ data, columns }: IDataProps) {
           {columns.map((value: any) => (
             <Column field={value.field} header={value.header} key={value.key} />
           ))}
-          <Column header="Edit" body={editButton} />
+          {editButton && <Column header="Edit" body={editButton} />}
         </DataTable>
       </div>
     </div>

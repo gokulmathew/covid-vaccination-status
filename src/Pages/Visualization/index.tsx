@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button } from "primereact/button";
 import { ToggleButton } from "primereact/togglebutton";
 // Redux imports
 import { visulizationActions } from "./visulizationSlice";
@@ -16,6 +18,7 @@ export default function Visualization() {
   const [state, setState] = useState<any>(null);
   const [displayTable, setDisplayTable] = useState(true);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Info: Initially making API call to get country list
@@ -51,6 +54,37 @@ export default function Visualization() {
   cityList = useSelector(
     (state: any) => state && state.visualization && state.visualization.cityList
   );
+  cityList = [
+    {
+      city: "Chennai",
+      totalPopulation: 1000,
+      vaccinatedPopulation: 500,
+      dosesAvailable: 100,
+    },
+    {
+      city: "Coimbatore",
+      totalPopulation: 1000,
+      vaccinatedPopulation: 500,
+      dosesAvailable: 100,
+    },
+    {
+      city: "Madurai",
+      totalPopulation: 1000,
+      vaccinatedPopulation: 500,
+      dosesAvailable: 100,
+    },
+  ];
+
+  // Function to render Edit button
+  const editButton = (rowData: any) => {
+    return (
+      <Button
+        type="button"
+        onClick={() => navigate("/edit", { state: rowData })}
+        icon="pi pi-fw pi-pencil"
+      ></Button>
+    );
+  };
   return (
     <>
       <div className="container-fluid">
@@ -107,9 +141,13 @@ export default function Visualization() {
         )}
 
         {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
-        {state && displayTable && (
-          <Table data={cityList} columns={visualizationTableColumns} />
-        )}
+        {/* {state && displayTable && ( */}
+        <Table
+          data={cityList}
+          columns={visualizationTableColumns}
+          editButton={editButton}
+        />
+        {/* )} */}
 
         {/* Info: Displaying Chart after state is selected and displayTable state has to be false */}
         {state && !displayTable && (
