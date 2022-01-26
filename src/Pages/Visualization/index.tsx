@@ -50,7 +50,7 @@ export default function Visualization() {
       state && state.visualization && state.visualization.stateList
   );
 
-  let cityList = null;
+  let cityList: any = null;
   cityList = useSelector(
     (state: any) => state && state.visualization && state.visualization.cityList
   );
@@ -60,18 +60,21 @@ export default function Visualization() {
       totalPopulation: 1000,
       vaccinatedPopulation: 500,
       dosesAvailable: 100,
+      id: 1,
     },
     {
       city: "Coimbatore",
       totalPopulation: 1000,
       vaccinatedPopulation: 500,
       dosesAvailable: 100,
+      id: 2,
     },
     {
       city: "Madurai",
       totalPopulation: 1000,
       vaccinatedPopulation: 500,
       dosesAvailable: 100,
+      id: 3,
     },
   ];
 
@@ -80,7 +83,7 @@ export default function Visualization() {
     return (
       <Button
         type="button"
-        onClick={() => navigate("/edit", { state: rowData })}
+        onClick={() => navigate("/edit", { state: { rowData, cityList } })}
         icon="pi pi-fw pi-pencil"
       ></Button>
     );
