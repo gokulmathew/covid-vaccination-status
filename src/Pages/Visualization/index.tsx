@@ -133,13 +133,13 @@ export default function Visualization() {
         )}
 
         {/* Info: Displaying Table after state is selected and displayTable state has to be true */}
-        {/* {state && displayTable && ( */}
-        <Table
-          data={cityList}
-          columns={visualizationTableColumns}
-          editButton={editButton}
-        />
-        {/* )} */}
+        {state && displayTable && (
+          <Table
+            data={cityList}
+            columns={visualizationTableColumns}
+            editButton={editButton}
+          />
+        )}
 
         {/* Info: Displaying Chart after state is selected and displayTable state has to be false */}
         {state && !displayTable && (
