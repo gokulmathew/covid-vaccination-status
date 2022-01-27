@@ -12,7 +12,6 @@ interface IButtonProps {
 // Function used to render Text Field
 function ButtonField({
   value,
-  disable,
   onClickFunction,
   spacingClasses,
 }: IButtonProps) {

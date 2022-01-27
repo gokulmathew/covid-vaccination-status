@@ -1,6 +1,7 @@
 const routeConstants = {
-  homePage: "/",
-  editCity: "/edit",
+  HOME_PAGE: "/",
+  EDIT_CITY: "/edit",
+  PAGE_NOT_FOUND: "*",
 };
 
 export default routeConstants;

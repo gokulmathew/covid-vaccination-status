@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { createBrowserHistory } from "history";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import saga from "./rootSaga";
 import rootReducer from "./rootReducer";
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
 
 const sagaMiddleware = createSagaMiddleware();
 export const history = createBrowserHistory();

@@ -106,7 +106,7 @@ export default function Visualization() {
   return (
     <>
       <div className="container-fluid">
-        <p>{appConstants.helpText}</p>
+        <p>{appConstants.HELP_TEXT}</p>
         <div className="row">
           <div className="col-4">
             <DropdownField
@@ -143,8 +143,8 @@ export default function Visualization() {
               <ToggleButton
                 checked={displayTable}
                 onChange={() => setDisplayTable(!displayTable)}
-                onLabel={appConstants.chartDisplay}
-                offLabel={appConstants.tableDisplay}
+                onLabel={appConstants.CHART_DISPLAY}
+                offLabel={appConstants.TABLE_DISPLAY}
                 style={{ width: "15rem" }}
               />
             )}
@@ -154,7 +154,7 @@ export default function Visualization() {
         {state && (
           <h2>
             {state && state.label}'s
-            {appConstants.VisualizationPageHeader}
+            {appConstants.VISUALIZATION_PAGE_HEADER}
           </h2>
         )}
 

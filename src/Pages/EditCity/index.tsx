@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // Prime react components
@@ -19,13 +19,13 @@ import styles from "./editcity.module.scss";
 export default function EditCity() {
   const toast: any = useRef(null);
   const { state }: any = useLocation();
+
   let rowData = state && state.rowData;
   let cityList = state && state.cityList;
   let selectedcountry = state && state.country;
   let selectedState = state && state.state;
 
   const [currentRowData, setCurrentRowData] = useState<any>(rowData);
-
   const [tableCityList, setTableCurrentCityList] = useState<any>(cityList);
 
   const updateCityList = (newValue: string | number, key: string) => {
@@ -81,9 +81,9 @@ export default function EditCity() {
       state.visualization.countriesVaccinationStatus
   );
 
+  // function to save all the changes
   const saveChanges = (e: any) => {
     e.preventDefault();
-
     // Deep clone of object
     let vaccnationStatus = JSON.parse(
       JSON.stringify(countriesVaccinationStatusList)
@@ -130,89 +130,95 @@ export default function EditCity() {
 
   const home = {
     icon: "pi pi-home",
-    command: () => navigate(routeConstants.homePage),
+    command: () => navigate(routeConstants.HOME_PAGE),
   };
   return (
     <div>
+      {/* For Toast message */}
+      <Toast ref={toast} />
       <BreadCrumb model={breadCrumbItems} home={home} />
       <div className="container">
-        {/* For Toast message */}
-        <Toast ref={toast} />
-        <h2>{appConstants.EDIT_PAGE_HEADER}</h2>
-        <form>
-          <label className="mt-2">City Name</label>
-          <InputText
-            value={
-              (tableCityList &&
-                tableCityList.filter(
-                  (cityDetail: any) => cityDetail.id === currentRowData.id
-                )[0].city) ||
-              ""
-            }
-            onChange={(e: any) => updateCityList(e.target.value, "city")}
-            className={`d-block mb-2`}
-          />
+        <div className="row justify-content-center">
+          <div className="col-4">
+            <h2>{appConstants.EDIT_PAGE_HEADER}</h2>
+            <form>
+              <label className="mt-2">{appConstants.CITY_NAME}</label>
+              <InputText
+                value={
+                  (tableCityList &&
+                    tableCityList.filter(
+                      (cityDetail: any) => cityDetail.id === currentRowData.id
+                    )[0].city) ||
+                  ""
+                }
+                onChange={(e: any) => updateCityList(e.target.value, "city")}
+                className={`d-block mb-3`}
+              />
 
-          <label className="mt-2">Total Population</label>
-          <InputNumber
-            value={
-              (tableCityList &&
-                tableCityList.filter(
-                  (cityDetail: any) => cityDetail.id === currentRowData.id
-                )[0].totalPopulation) ||
-              0
-            }
-            onChange={(e: any) =>
-              updateCityList(e && e.value, "totalPopulation")
-            }
-            className={`d-block mb-2`}
-          />
+              <label className="mt-2">{appConstants.TOTAL_POPULATION}</label>
+              <InputNumber
+                value={
+                  (tableCityList &&
+                    tableCityList.filter(
+                      (cityDetail: any) => cityDetail.id === currentRowData.id
+                    )[0].totalPopulation) ||
+                  0
+                }
+                onChange={(e: any) =>
+                  updateCityList(e && e.value, "totalPopulation")
+                }
+                className={`d-block mb-3`}
+              />
 
-          <label className="mt-2">Vaccinated Population</label>
-          <InputNumber
-            value={
-              (tableCityList &&
-                tableCityList.filter(
-                  (cityDetail: any) => cityDetail.id === currentRowData.id
-                )[0].vaccinatedPopulation) ||
-              0
-            }
-            onChange={(e: any) =>
-              updateCityList(e && e.value, "vaccinatedPopulation")
-            }
-            max={
-              (tableCityList &&
-                tableCityList.filter(
-                  (cityDetail: any) => cityDetail.id === currentRowData.id
-                )[0].totalPopulation) ||
-              0
-            }
-            className={`d-block mb-2`}
-          />
+              <label className="mt-2">
+                {appConstants.VACCINATED_POPULATION}
+              </label>
+              <InputNumber
+                value={
+                  (tableCityList &&
+                    tableCityList.filter(
+                      (cityDetail: any) => cityDetail.id === currentRowData.id
+                    )[0].vaccinatedPopulation) ||
+                  0
+                }
+                onChange={(e: any) =>
+                  updateCityList(e && e.value, "vaccinatedPopulation")
+                }
+                max={
+                  (tableCityList &&
+                    tableCityList.filter(
+                      (cityDetail: any) => cityDetail.id === currentRowData.id
+                    )[0].totalPopulation) ||
+                  0
+                }
+                className={`d-block mb-3`}
+              />
 
-          <label className="mt-2">Doses Available</label>
-          <InputNumber
-            value={
-              (tableCityList &&
-                tableCityList.filter(
-                  (cityDetail: any) => cityDetail.id === currentRowData.id
-                )[0].dosesAvailable) ||
-              0
-            }
-            onChange={(e: any) =>
-              updateCityList(e && e.value, "dosesAvailable")
-            }
-            max={appConstants.MAX_DOSES_AVAILABLE_COUNT}
-            className={`d-block mb-2`}
-          />
+              <label className="mt-2">{appConstants.DOSES_AVAILABLE}</label>
+              <InputNumber
+                value={
+                  (tableCityList &&
+                    tableCityList.filter(
+                      (cityDetail: any) => cityDetail.id === currentRowData.id
+                    )[0].dosesAvailable) ||
+                  0
+                }
+                onChange={(e: any) =>
+                  updateCityList(e && e.value, "dosesAvailable")
+                }
+                max={appConstants.MAX_DOSES_AVAILABLE_COUNT}
+                className={`d-block mb-3`}
+              />
 
-          <ButtonField
-            value="Save"
-            disable={false}
-            onClickFunction={(e) => saveChanges(e)}
-            spacingClasses=""
-          />
-        </form>
+              <ButtonField
+                value="Save"
+                disable={false}
+                onClickFunction={(e) => saveChanges(e)}
+                spacingClasses=""
+              />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
