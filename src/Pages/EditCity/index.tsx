@@ -29,7 +29,7 @@ export default function EditCity() {
   const [tableCityList, setTableCurrentCityList] = useState<any>(cityList);
 
   const updateCityList = (newValue: string | number, key: string) => {
-    let tempCityList = [...tableCityList];
+    let tempCityList = JSON.parse(JSON.stringify(tableCityList));
     const index =
       tableCityList &&
       tableCityList.findIndex(
@@ -168,6 +168,7 @@ export default function EditCity() {
                   updateCityList(e && e.value, "totalPopulation")
                 }
                 className={`d-block mb-3`}
+                inputId="integeronly"
               />
 
               <label className="mt-2">
@@ -192,6 +193,7 @@ export default function EditCity() {
                   0
                 }
                 className={`d-block mb-3`}
+                inputId="integeronly"
               />
 
               <label className="mt-2">{appConstants.DOSES_AVAILABLE}</label>
@@ -208,6 +210,7 @@ export default function EditCity() {
                 }
                 max={appConstants.MAX_DOSES_AVAILABLE_COUNT}
                 className={`d-block mb-3`}
+                inputId="integeronly"
               />
 
               <ButtonField
