@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { ToggleButton } from "primereact/togglebutton";
 // Redux imports
-import { visulizationActions } from "./visulizationSlice";
+import { visulizationActions } from "./visualizationSlice";
 // Component Imports
 import Table from "../../components/Table";
 import Chart from "../../components/Chart";

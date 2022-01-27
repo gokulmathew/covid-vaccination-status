@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import { visulizationActions } from "./visulizationSlice";
-import visualizationService from "./visulizationService";
+import { visulizationActions } from "./visualizationSlice";
+import visualizationService from "./visualizationService";
 
 // Generator to get Country Vaccination Status list
 function* getCountriesVaccinationStatusList(): any {

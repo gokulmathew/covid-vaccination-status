@@ -11,7 +11,7 @@ import ButtonField from "../../components/Button";
 import appConstants from "../../constants/appConstants";
 import notificationConstants from "../../constants/notificationConstans";
 // Redux Imports
-import { visulizationActions } from "../Visualization/visulizationSlice";
+import { visulizationActions } from "../Visualization/visualizationSlice";
 import routeConstants from "../../constants/routeConstants";
 // Style imports
 import styles from "./editcity.module.scss";
