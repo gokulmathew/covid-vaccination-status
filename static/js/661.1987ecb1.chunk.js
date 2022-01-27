@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcovid_vaccination_status=self.webpackChunkcovid_vaccination_status||[]).push([[661],{661:function(t,n,c){c.r(n),c.d(n,{default:function(){return s}});var e=c(705),a=c(184);function s(){return(0,a.jsx)("p",{className:"text-center",children:e.Z.PAGE_NOT_FOUND})}}}]);
+//# sourceMappingURL=661.1987ecb1.chunk.js.map
