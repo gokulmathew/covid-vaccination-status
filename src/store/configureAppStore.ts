@@ -3,13 +3,22 @@ import createSagaMiddleware from "redux-saga";
 import { createBrowserHistory } from "history";
 import saga from "./rootSaga";
 import rootReducer from "./rootReducer";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
 const sagaMiddleware = createSagaMiddleware();
 export const history = createBrowserHistory();
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export default function configureAppStore() {
   const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     middleware: [sagaMiddleware],
   });
   // Info: You have to run the saga using the created sagaMiddleware
