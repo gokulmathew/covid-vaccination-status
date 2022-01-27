@@ -2,46 +2,23 @@ import { put, takeLatest, call } from "redux-saga/effects";
 import { visulizationActions } from "./visulizationSlice";
 import visualizationService from "./visulizationService";
 
-// Generator to get Country list
-function* getCountryList(): any {
+// Generator to get Country Vaccination Status list
+function* getCountriesVaccinationStatusList(): any {
   try {
-    const response = yield call(visualizationService.getCountryList);
-    yield put(visulizationActions.getCountryListSuccess(response.data));
+    const response = yield call(
+      visualizationService.getCountryiesVaccinationStatusList
+    );
+    yield put(
+      visulizationActions.getCountriesVaccinationStatusSuccess(response.data)
+    );
   } catch (e: any) {
-    yield put(visulizationActions.getCountryListFail());
+    yield put(visulizationActions.getCountriesVaccinationStatusFail());
   }
 }
 
-// Generator to get State list
-function* getStateList(action: any): any {
-  try {
-    const response = yield call(
-      visualizationService.getStateList,
-      action.payload
-    );
-    yield put(visulizationActions.getStateListSuccess(response.data));
-  } catch (e: any) {
-    yield put(visulizationActions.getStateListFail());
-  }
-}
-
-// Generator to get City list
-function* getCityList(action: any): any {
-  try {
-    const response = yield call(
-      visualizationService.getCityList,
-      action.payload
-    );
-    yield put(visulizationActions.getCityListSuccess(response.data));
-  } catch (e: any) {
-    yield put(visulizationActions.getCityListFail());
-  }
-}
 export default function* watchVisulizationSaga() {
   yield takeLatest(
-    visulizationActions.getCountryListRequest.type,
-    getCountryList
+    visulizationActions.getCountriesVaccinationStatusRequest.type,
+    getCountriesVaccinationStatusList
   );
-  yield takeLatest(visulizationActions.getStateListRequest.type, getStateList);
-  yield takeLatest(visulizationActions.getCityListRequest.type, getCityList);
 }

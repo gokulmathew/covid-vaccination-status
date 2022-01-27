@@ -21,76 +21,58 @@ export default function Visualization() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let countryList: any = null;
-  countryList = useSelector(
+  let countriesVaccinationStatusList: any = null;
+  countriesVaccinationStatusList = useSelector(
     (state: any) =>
-      state && state.visualization && state.visualization.countryList
+      state &&
+      state.visualization &&
+      state.visualization.countriesVaccinationStatus
   );
-  // Info: Initially making API call to get country list
+
+  // Info: Initially making API call to get countries Vaccination status data
   useEffect(() => {
-    if (countryList === null || countryList.length == 0)
-      dispatch(visulizationActions.getCountryListRequest());
+    if (
+      countriesVaccinationStatusList == null ||
+      Object.keys(countriesVaccinationStatusList).length === 0
+    )
+      dispatch(visulizationActions.getCountriesVaccinationStatusRequest());
   }, []);
 
-  let stateList: any = null;
-  stateList = useSelector(
-    (state: any) =>
-      state && state.visualization && state.visualization.stateList
-  );
+  // Info: Storing Country List
+  let countryList: any = [];
+  Object.keys(countriesVaccinationStatusList).forEach((country: any) => {
+    countryList.push({ label: country, value: country });
+  });
 
-  // Info: When country is changing, fetching state List
+  // Info: Storing State  List
+  let stateList: any = [];
+  countriesVaccinationStatusList &&
+    country &&
+    Object.keys(countriesVaccinationStatusList[country.value]).forEach(
+      (state: any) => {
+        stateList.push({ label: state, value: state });
+      }
+    );
   useEffect(() => {
-    if (stateList === null || stateList.length == 0) {
-      dispatch(
-        visulizationActions.getStateListRequest(country && country.value)
-      );
-      // Info: When country is changed, setting state to null
-      setState(null);
-    }
+    setState(null);
   }, [country]);
 
-  let cityList: any = null;
-  cityList = useSelector(
-    (state: any) => state && state.visualization && state.visualization.cityList
-  );
-
-  // Info: When state is changing, fetching city List
-  useEffect(() => {
-    if (cityList === null || cityList.length == 0)
-      dispatch(visulizationActions.getCityListRequest(state && state.value));
-  }, [state]);
-
-  console.log("cityListstore", cityList);
-  // cityList = [
-  //   {
-  //     city: "Chennai",
-  //     totalPopulation: 1000,
-  //     vaccinatedPopulation: 500,
-  //     dosesAvailable: 100,
-  //     id: 1,
-  //   },
-  //   {
-  //     city: "Coimbatore",
-  //     totalPopulation: 1000,
-  //     vaccinatedPopulation: 500,
-  //     dosesAvailable: 100,
-  //     id: 2,
-  //   },
-  //   {
-  //     city: "Madurai",
-  //     totalPopulation: 1000,
-  //     vaccinatedPopulation: 500,
-  //     dosesAvailable: 100,
-  //     id: 3,
-  //   },
-  // ];
+  // Info: Storing City List
+  let cityList: any = [];
+  cityList =
+    countriesVaccinationStatusList &&
+    country &&
+    state &&
+    countriesVaccinationStatusList[country.value][state.value];
 
   // Function to render Edit button
   const editButton = (rowData: any) => {
     return (
       <Button
         type="button"
-        onClick={() => navigate("/edit", { state: { rowData, cityList } })}
+        onClick={() =>
+          navigate("/edit", { state: { rowData, cityList, country, state } })
+        }
         icon="pi pi-fw pi-pencil"
       ></Button>
     );

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // Prime react components
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
@@ -19,9 +19,10 @@ import styles from "./editcity.module.scss";
 export default function EditCity() {
   const toast: any = useRef(null);
   const { state }: any = useLocation();
-  // let { rowData, cityList } = state;
   let rowData = state && state.rowData;
   let cityList = state && state.cityList;
+  let selectedcountry = state && state.country;
+  let selectedState = state && state.state;
 
   const [currentRowData, setCurrentRowData] = useState<any>(rowData);
 
@@ -70,16 +71,29 @@ export default function EditCity() {
     }
   };
 
-  useEffect(() => {
-    console.log("tableCityList", tableCityList);
-  }, [tableCityList]);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let countriesVaccinationStatusList: any = null;
+  countriesVaccinationStatusList = useSelector(
+    (state: any) =>
+      state &&
+      state.visualization &&
+      state.visualization.countriesVaccinationStatus
+  );
+
   const saveChanges = (e: any) => {
     e.preventDefault();
-    dispatch(visulizationActions.getCityListSuccess(tableCityList));
-    console.log("tableCityList", tableCityList);
+
+    // Deep clone of object
+    let vaccnationStatus = JSON.parse(
+      JSON.stringify(countriesVaccinationStatusList)
+    );
+    vaccnationStatus[selectedcountry.value][selectedState.value] =
+      tableCityList;
+
+    dispatch(
+      visulizationActions.getCountriesVaccinationStatusSuccess(vaccnationStatus)
+    );
     toast &&
       toast.current.show({
         severity: "success",

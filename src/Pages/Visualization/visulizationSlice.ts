@@ -2,16 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface IVisulizationSlice {
   loading: boolean;
-  countryList: any;
-  stateList: any;
-  cityList: any;
+  countriesVaccinationStatus: any;
 }
 
 const initialState: IVisulizationSlice = {
   loading: false,
-  countryList: [],
-  stateList: [],
-  cityList: [],
+  countriesVaccinationStatus: {},
 };
 
 const slice = createSlice({
@@ -19,45 +15,17 @@ const slice = createSlice({
   initialState,
 
   reducers: {
-    //reducer to update Country List
-    getCountryListRequest: (visulization: any) => {
+    //reducer to update Country Vaccination status
+    getCountriesVaccinationStatusRequest: (visulization: any) => {
       visulization.loading = true;
     },
 
-    getCountryListSuccess: (visulization: any, action: any) => {
+    getCountriesVaccinationStatusSuccess: (visulization: any, action: any) => {
       visulization.loading = false;
-      visulization.countryList = action.payload;
+      visulization.countriesVaccinationStatus = action.payload;
     },
 
-    getCountryListFail: (visulization: any) => {
-      visulization.loading = false;
-    },
-
-    //reducer to update State List
-    getStateListRequest: (visulization: any, action: any) => {
-      visulization.loading = true;
-    },
-
-    getStateListSuccess: (visulization: any, action: any) => {
-      visulization.loading = false;
-      visulization.stateList = action.payload;
-    },
-
-    getStateListFail: (visulization: any) => {
-      visulization.loading = false;
-    },
-
-    //Reducer to update City List
-    getCityListRequest: (visulization: any, action: any) => {
-      visulization.loading = true;
-    },
-
-    getCityListSuccess: (visulization: any, action: any) => {
-      visulization.loading = false;
-      visulization.cityList = action.payload;
-    },
-
-    getCityListFail: (visulization: any) => {
+    getCountriesVaccinationStatusFail: (visulization: any) => {
       visulization.loading = false;
     },
   },
