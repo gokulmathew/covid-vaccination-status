@@ -14,10 +14,6 @@ import appConstants from "../../constants/appConstants";
 import visualizationTableColumns from "../../constants/visualizationTableColumn";
 
 export default function Visualization() {
-  const [country, setCountry] = useState<any>(null);
-  const [state, setState] = useState<any>(null);
-  const [displayTable, setDisplayTable] = useState(true);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,6 +24,26 @@ export default function Visualization() {
       state.visualization &&
       state.visualization.countriesVaccinationStatus
   );
+
+  // Storing the zeroth value in country and state dropdown
+  const [country, setCountry] = useState<any>({
+    label:
+      countriesVaccinationStatusList &&
+      Object.keys(countriesVaccinationStatusList)[0],
+    value:
+      countriesVaccinationStatusList &&
+      Object.keys(countriesVaccinationStatusList)[0],
+  });
+  const [state, setState] = useState<any>({
+    label:
+      countriesVaccinationStatusList &&
+      country &&
+      Object.keys(countriesVaccinationStatusList[country.value])[0],
+    value:
+      countriesVaccinationStatusList &&
+      Object.keys(countriesVaccinationStatusList[country.value])[0],
+  });
+  const [displayTable, setDisplayTable] = useState(true);
 
   // Info: Initially making API call to get countries Vaccination status data
   useEffect(() => {
@@ -53,8 +69,18 @@ export default function Visualization() {
         stateList.push({ label: state, value: state });
       }
     );
+
+  // Updating state dropdown when ever country is changed
   useEffect(() => {
-    setState(null);
+    setState({
+      label:
+        countriesVaccinationStatusList &&
+        country &&
+        Object.keys(countriesVaccinationStatusList[country.value])[0],
+      value:
+        countriesVaccinationStatusList &&
+        Object.keys(countriesVaccinationStatusList[country.value])[0],
+    });
   }, [country]);
 
   // Info: Storing City List
