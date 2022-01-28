@@ -123,7 +123,7 @@ export default function EditCity() {
           });
         },
         className: `${
-          currentRowData.id == cityDetail.id ? styles.breadcrumbUnderline : ""
+          currentRowData.id === cityDetail.id ? styles.breadcrumbUnderline : ""
         }`,
       });
     });
