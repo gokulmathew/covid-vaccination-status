@@ -38,7 +38,7 @@ function DropdownField({
 
   // Info: filterting unselected options
   options &&
-    options.map((opt: any) => {
+    options.forEach((opt: any) => {
       if (!(value && value.value === opt.value)) {
         unSelectedOptions.push({ label: opt.label, value: opt.value });
       } else if (!value) {
