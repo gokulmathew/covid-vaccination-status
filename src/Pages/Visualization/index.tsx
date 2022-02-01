@@ -29,18 +29,24 @@ export default function Visualization() {
   const [country, setCountry] = useState<any>({
     label:
       countriesVaccinationStatusList &&
+      Object.keys(countriesVaccinationStatusList) &&
       Object.keys(countriesVaccinationStatusList)[0],
     value:
       countriesVaccinationStatusList &&
+      Object.keys(countriesVaccinationStatusList) &&
       Object.keys(countriesVaccinationStatusList)[0],
   });
   const [state, setState] = useState<any>({
     label:
       countriesVaccinationStatusList &&
       country &&
+      country.value &&
+      Object.keys(countriesVaccinationStatusList[country.value]) &&
       Object.keys(countriesVaccinationStatusList[country.value])[0],
     value:
       countriesVaccinationStatusList &&
+      country.value &&
+      Object.keys(countriesVaccinationStatusList[country.value]) &&
       Object.keys(countriesVaccinationStatusList[country.value])[0],
   });
   const [displayTable, setDisplayTable] = useState(true);
@@ -64,6 +70,7 @@ export default function Visualization() {
   let stateList: any = [];
   countriesVaccinationStatusList &&
     country &&
+    country.value &&
     Object.keys(countriesVaccinationStatusList[country.value]).forEach(
       (state: any) => {
         stateList.push({ label: state, value: state });
@@ -88,7 +95,9 @@ export default function Visualization() {
   cityList =
     countriesVaccinationStatusList &&
     country &&
+    country.value &&
     state &&
+    state.value &&
     countriesVaccinationStatusList[country.value][state.value];
 
   // Function to render Edit button
